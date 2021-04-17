@@ -68,7 +68,7 @@
         border-radius: 30px;
         color: #909399;
         font-size: 16px;
-        min-width: 4000px;
+        min-width: 400px;
         height: auto;
     }
 </style>

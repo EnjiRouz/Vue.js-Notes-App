@@ -67,26 +67,31 @@
 
         data() {
             return {
+                uniqueId: 2,
                 title: 'Notes App',
                 message: null,
                 grid: true,
                 search: '',
                 note: {
+                    id: null,
                     title: '',
                     description: ''
                 },
                 notes: [
                     {
+                        id: 0,
                         title: 'Welcome Note',
                         description: 'Start Creating Notes Now!',
                         date: new Date(Date.now()).toLocaleString()
                     },
                     {
+                        id: 1,
                         title: 'Shopping List',
                         description: 'Milk, coffee, cookies',
                         date: new Date(Date.now()).toLocaleString()
                     },
                     {
+                        id: 2,
                         title: 'TODO List',
                         description: 'Clean house, cook dinner',
                         date: new Date(Date.now()).toLocaleString()
@@ -95,8 +100,8 @@
             }
         },
 
-        computed:{
-            getFilteredNotes(){
+        computed: {
+            getFilteredNotes() {
                 let notesToShow = this.notes,
                     notesToSearch = this.search;
                 if (!notesToSearch) return notesToShow;
@@ -104,7 +109,7 @@
                 notesToSearch = notesToSearch.trim().toLowerCase();
                 notesToShow = notesToShow.filter(function (item) {
                     if (item.title.toLowerCase().indexOf(notesToSearch) !== -1
-                    || item.description.toLowerCase().indexOf(notesToSearch) !== -1) {
+                        || item.description.toLowerCase().indexOf(notesToSearch) !== -1) {
                         return item;
                     }
                 });
@@ -115,22 +120,33 @@
 
         methods: {
             addNewNote() {
-                let {title, description} = this.note;
+                let {id, title, description} = this.note;
                 if (title === '') {
                     this.message = "Title can't be blank";
                     return false;
                 }
                 this.notes.push({
+                    id: this.getUniqueId(),
                     title,
                     description,
                     date: new Date(Date.now()).toLocaleString()
                 });
+                this.note.id = null;
                 this.note.title = "";
                 this.note.description = "";
                 this.message = null;
             },
-            removeNote(index) {
-                this.notes.splice(index, 1)
+
+            removeNote(noteId) {
+                let allNotes = this.notes;
+                for (let index = 0; index < allNotes.length; index++) {
+                    if (allNotes[index].id === noteId)
+                        allNotes.splice(index, 1);
+                }
+            },
+
+            getUniqueId() {
+                return this.uniqueId += 1;
             }
         }
     }

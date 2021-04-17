@@ -1,9 +1,9 @@
 <template>
     <div class="notes">
-        <div class="note" :class="{ full: !grid}" v-for="(note, index) in notes" :key="index">
+        <div class="note" :class="{ full: !grid}" v-for="(note) in notes" :key="note.id">
             <div class="note-header">
                 <p>{{ note.title }}</p>
-                <button class="close-btn" @click="removeNote(index)">x</button>
+                <button class="close-btn" @click="removeNote(note.id)">x</button>
             </div>
             <div class="note-body">
                 <p>{{ note.description }}</p>
@@ -27,8 +27,8 @@
             }
         },
         methods: {
-            removeNote(index) {
-                this.$emit('remove', index)
+            removeNote(noteId) {
+                this.$emit('remove', noteId)
             }
         }
     }
