@@ -13,7 +13,7 @@
                     <new-note-creator :note="note" @addNote="addNewNote"/>
 
                     <!-- отображение заметок -->
-                    <notes :notes="notes"/>
+                    <notes :notes="notes" @remove="removeNote"/>
                 </div>
             </section>
         </div>
@@ -25,8 +25,9 @@
     import message from '@/components/Message.vue'
     import newNoteCreator from "@/components/NewNoteCreator";
     import notes from "@/components/Notes";
+
     export default {
-        components:{
+        components: {
             message,
             newNoteCreator,
             notes
@@ -73,6 +74,9 @@
                 this.note.title = "";
                 this.note.description = "";
                 this.message = null;
+            },
+            removeNote(index) {
+                this.notes.splice(index, 1)
             }
         }
     }

@@ -18,9 +18,10 @@
 </script>
 
 <style scoped lang="scss">
-    .message{
+    .message {
         text-align: center;
     }
+
     p {
         color: #fc5c65;
     }
