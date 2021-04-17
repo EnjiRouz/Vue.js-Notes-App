@@ -12,9 +12,14 @@
                     <!-- новая заметка -->
                     <new-note-creator :note="note" @addNote="addNewNote"/>
 
-                    <!-- режим отображения -->
+                    <!-- режим отображения и поиск -->
                     <div class="note-header">
-                        <h1>Your Notes</h1>
+                        <h1>Created Notes</h1>
+
+                        <search :value="search"
+                                placeholder="Find a note"
+                                @search="search = $event"/>
+
                         <div class="icons">
                             <svg :class="{ active: grid }" @click="grid = true" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -37,8 +42,8 @@
                         </div>
                     </div>
 
-                    <!-- отображение заметок -->
-                    <notes :notes="notes" :grid="grid" @remove="removeNote"/>
+                    <!-- созданные заметки -->
+                    <notes :notes="getFilteredNotes" :grid="grid" @remove="removeNote"/>
                 </div>
             </section>
         </div>
@@ -50,18 +55,22 @@
     import message from '@/components/Message.vue'
     import newNoteCreator from "@/components/NewNoteCreator";
     import notes from "@/components/Notes";
+    import search from "@/components/Search";
 
     export default {
         components: {
             message,
             newNoteCreator,
-            notes
+            notes,
+            search
         },
+
         data() {
             return {
                 title: 'Notes App',
                 message: null,
                 grid: true,
+                search: '',
                 note: {
                     title: '',
                     description: ''
@@ -85,6 +94,25 @@
                 ]
             }
         },
+
+        computed:{
+            getFilteredNotes(){
+                let notesToShow = this.notes,
+                    notesToSearch = this.search;
+                if (!notesToSearch) return notesToShow;
+
+                notesToSearch = notesToSearch.trim().toLowerCase();
+                notesToShow = notesToShow.filter(function (item) {
+                    if (item.title.toLowerCase().indexOf(notesToSearch) !== -1
+                    || item.description.toLowerCase().indexOf(notesToSearch) !== -1) {
+                        return item;
+                    }
+                });
+
+                return notesToShow;
+            }
+        },
+
         methods: {
             addNewNote() {
                 let {title, description} = this.note;

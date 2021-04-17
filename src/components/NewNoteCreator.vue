@@ -1,5 +1,5 @@
 <template>
-    <div class="new-note">
+    <div class="new-note-creator">
         <label>Note Title
             <input v-model="note.title" type="text">
         </label>
@@ -34,7 +34,8 @@
         font-family: $mainFont;
     }
 
-    .new-note {
+    .new-note-creator {
         text-align: center;
+        margin: 30px 0;
     }
 </style>

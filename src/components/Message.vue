@@ -11,7 +11,7 @@
             message: {
                 type: String,
                 required: true,
-                default: '-'
+                default: ''
             }
         }
     }
