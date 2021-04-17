@@ -1,6 +1,6 @@
 <template>
     <div class="notes">
-        <div class="note" v-for="(note, index) in notes" :key="index">
+        <div class="note" :class="{ full: !grid}" v-for="(note, index) in notes" :key="index">
             <div class="note-header">
                 <p>{{ note.title }}</p>
                 <button class="close-btn" @click="removeNote(index)">x</button>
@@ -20,6 +20,10 @@
             notes: {
                 type: Array,
                 required: true
+            },
+            grid: {
+                type: Boolean,
+                required: true
             }
         },
         methods: {
@@ -30,7 +34,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .notes {
         display: flex;
         align-items: center;
@@ -44,6 +48,19 @@
         padding: 18px 20px;
         margin-bottom: 20px;
         background-color: white;
+
+        transition: all .25s cubic-bezier(.025, .01, .50, 1);
+        box-shadow: 0 30px 30px rgba(0, 0, 0, .025);
+
+        &:hover {
+            box-shadow: 0 30px 30px rgba(0, 0, 0, .04);
+            transform: translate(0, -5px);
+            transition-delay: 0s !important;
+        }
+
+        &.full {
+            width: 100%;
+        }
     }
 
     .note-header {
@@ -54,6 +71,20 @@
         p {
             font-weight: bold;
             color: #494ce8;
+        }
+
+        svg {
+            margin-right: 12px;
+            color: grey;
+            cursor: pointer;
+
+            &.active {
+                color: #494ce8;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
         }
     }
 

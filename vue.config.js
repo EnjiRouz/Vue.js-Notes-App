@@ -10,5 +10,12 @@ module.exports = {
         : '/',
     assetsDir: 'assets',
     productionSourceMap: false,
-    filenameHashing: true
+    filenameHashing: true,
+    css: {
+        loaderOptions: {
+            scss: {
+                additionalData: `@import "@/assets/scss/main.scss";`
+            }
+        }
+    }
 };

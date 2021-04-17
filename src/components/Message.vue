@@ -23,6 +23,6 @@
     }
 
     p {
-        color: #fc5c65;
+        color: $danger-color;
     }
 </style>
