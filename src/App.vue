@@ -75,26 +75,30 @@
                 note: {
                     id: null,
                     title: '',
-                    description: ''
+                    description: '',
+                    priorityLevel: '',
                 },
                 notes: [
                     {
                         id: 0,
                         title: 'Welcome Note',
                         description: 'Start Creating Notes Now!',
-                        date: new Date(Date.now()).toLocaleString()
+                        date: new Date(Date.now()).toLocaleString(),
+                        priorityLevel: -1,
                     },
                     {
                         id: 1,
                         title: 'Shopping List',
                         description: 'Milk, coffee, cookies',
-                        date: new Date(Date.now()).toLocaleString()
+                        date: new Date(Date.now()).toLocaleString(),
+                        priorityLevel: 1,
                     },
                     {
                         id: 2,
                         title: 'TODO List',
                         description: 'Clean house, cook dinner',
-                        date: new Date(Date.now()).toLocaleString()
+                        date: new Date(Date.now()).toLocaleString(),
+                        priorityLevel: 0,
                     }
                 ]
             }
@@ -120,7 +124,7 @@
 
         methods: {
             addNewNote() {
-                let {id, title, description} = this.note;
+                let {title, description, priorityLevel} = this.note;
                 if (title === '') {
                     this.message = "Title can't be blank";
                     return false;
@@ -129,11 +133,13 @@
                     id: this.getUniqueId(),
                     title,
                     description,
-                    date: new Date(Date.now()).toLocaleString()
+                    date: new Date(Date.now()).toLocaleString(),
+                    priorityLevel
                 });
                 this.note.id = null;
                 this.note.title = "";
                 this.note.description = "";
+                this.note.priorityLevel = "";
                 this.message = null;
             },
 

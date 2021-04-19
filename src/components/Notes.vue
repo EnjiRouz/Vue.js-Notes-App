@@ -1,13 +1,16 @@
 <template>
     <div class="notes">
         <div class="note" :class="{ full: !grid}" v-for="(note) in notes" :key="note.id">
-            <div class="note-header">
-                <p>{{ note.title }}</p>
-                <button class="close-btn" @click="removeNote(note.id)">x</button>
-            </div>
-            <div class="note-body">
-                <p>{{ note.description }}</p>
-                <span>{{ note.date }}</span>
+            <div class="priority" :class="{ high: note.priorityLevel > 0, low: note.priorityLevel < 0}"></div>
+            <div class="text-content">
+                <div class="note-header">
+                    <p>{{ note.title }}</p>
+                    <button class="close-btn" @click="removeNote(note.id)">x</button>
+                </div>
+                <div class="note-body">
+                    <p>{{ note.description }}</p>
+                    <span>{{ note.date }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +47,12 @@
     }
 
     .note {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+
         width: 48%;
+        height: 200px;
         padding: 18px 20px;
         margin-bottom: 20px;
         background-color: white;
@@ -61,6 +69,10 @@
         &.full {
             width: 100%;
         }
+    }
+
+    .text-content{
+        width: 100%;
     }
 
     .note-header {
@@ -91,6 +103,9 @@
     .note-body {
         p {
             margin: 20px 0;
+            max-height: 50px;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         span {
@@ -104,5 +119,22 @@
         background-color: white;
         border: none;
         cursor: pointer;
+    }
+
+    .priority {
+        width: 15px;
+        height: 110px;
+        margin-right: 30px;
+
+        border-radius: 20px;
+        background-color: $success-color;
+
+        &.high {
+            background-color: $danger-color;
+        }
+
+        &.low {
+            background-color: $primary-color;
+        }
     }
 </style>
