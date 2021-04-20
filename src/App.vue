@@ -108,7 +108,7 @@
             getFilteredNotes() {
                 let notesToShow = this.notes,
                     notesToSearch = this.search;
-                if (!notesToSearch) return notesToShow;
+                if (!notesToSearch) return sortByPriority(notesToShow);
 
                 notesToSearch = notesToSearch.trim().toLowerCase();
                 notesToShow = notesToShow.filter(function (item) {
@@ -118,8 +118,13 @@
                     }
                 });
 
-                return notesToShow;
-            }
+                return sortByPriority(notesToShow);
+
+                // сортировка по приоритету (от высокого к низкому: от красного к синему)
+                function sortByPriority(notes) {
+                    return notes.sort((firstElement, secondElement) => secondElement.priorityLevel - firstElement.priorityLevel);
+                }
+            },
         },
 
         methods: {
