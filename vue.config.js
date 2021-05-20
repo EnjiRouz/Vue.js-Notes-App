@@ -6,7 +6,7 @@
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-        ? 'Vue.js-Notes-App' // для сервера использовать '/' либо путь к нужной папке, а для локального билда ''
+        ? '' // для сервера использовать '/' либо путь к нужной папке, а для локального билда ''
         : '/',
     assetsDir: 'assets',
     productionSourceMap: false,
