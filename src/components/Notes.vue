@@ -4,11 +4,23 @@
             <div class="priority" :class="{ high: note.priorityLevel > 0, low: note.priorityLevel < 0}"></div>
             <div class="text-content">
                 <div class="note-header">
-                    <p>{{ note.title }}</p>
+                    <input class="note-editor"
+                           v-if="note.titleEditModeEnabled"
+                           v-model="note.title"
+                           @blur="[note.titleEditModeEnabled = false, $emit('update')]"
+                           @keyup.enter="[note.titleEditModeEnabled=false, $emit('update')]"
+                           v-focus>
+                    <p v-else @click="note.titleEditModeEnabled = true">{{ note.title }}</p>
                     <button class="close-btn" @click="removeNote(note.id)">x</button>
                 </div>
                 <div class="note-body">
-                    <p>{{ note.description }}</p>
+                    <input class="note-editor"
+                           v-if="note.descriptionEditModeEnabled"
+                           v-model="note.description"
+                           @blur="[note.descriptionEditModeEnabled = false, $emit('update')]"
+                           @keyup.enter="[note.descriptionEditModeEnabled=false, $emit('update')]"
+                           v-focus>
+                    <p v-else @click="note.descriptionEditModeEnabled = true">{{ note.description }}</p>
                     <span>{{ note.date }}</span>
                 </div>
             </div>
@@ -32,6 +44,15 @@
         methods: {
             removeNote(noteId) {
                 this.$emit('remove', noteId)
+            }
+        },
+        directives: {
+            focus: {
+                // когда привязанный элемент вставлен в DOM - переключаем фокус на элемент
+                // Подробнее о директивах: https://ru.vuejs.org/v2/guide/custom-directive.html
+                inserted (note) {
+                    note.focus()
+                }
             }
         }
     }
@@ -71,7 +92,7 @@
         }
     }
 
-    .text-content{
+    .text-content {
         width: 100%;
     }
 
@@ -100,6 +121,18 @@
         }
     }
 
+    .note-editor {
+        height: auto;
+        padding: 0;
+        margin-bottom: 0;
+        border-radius: 5px;
+
+        font-family: "Montserrat", Helvetica, Arial, sans-serif;
+        font-size: 100%;
+        font-weight: bold;
+        color: #494ce8;
+    }
+
     .note-body {
         p {
             margin: 20px 0;
@@ -111,6 +144,16 @@
         span {
             font-size: 14px;
             color: grey;
+        }
+
+        .note-editor {
+            margin: 20px 0;
+            max-height: 50px;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            font-weight: normal;
+            color: black;
         }
     }
 

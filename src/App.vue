@@ -77,6 +77,8 @@
                     title: '',
                     description: '',
                     priorityLevel: '',
+                    titleEditModeEnabled: false,
+                    descriptionEditModeEnabled: false
                 },
                 notes: [
                     {
@@ -85,6 +87,8 @@
                         description: 'Start Creating Notes Now!',
                         date: new Date(Date.now()).toLocaleString(),
                         priorityLevel: -1,
+                        titleEditModeEnabled: false,
+                        descriptionEditModeEnabled: false
                     },
                     {
                         id: 1,
@@ -92,6 +96,8 @@
                         description: 'Milk, coffee, cookies',
                         date: new Date(Date.now()).toLocaleString(),
                         priorityLevel: 1,
+                        titleEditModeEnabled: false,
+                        descriptionEditModeEnabled: false
                     },
                     {
                         id: 2,
@@ -99,6 +105,8 @@
                         description: 'Clean house, cook dinner',
                         date: new Date(Date.now()).toLocaleString(),
                         priorityLevel: 0,
+                        titleEditModeEnabled: false,
+                        descriptionEditModeEnabled: false
                     }
                 ]
             }
@@ -145,6 +153,8 @@
                 this.note.title = "";
                 this.note.description = "";
                 this.note.priorityLevel = "";
+                this.note.titleEditModeEnabled = false;
+                this.note.descriptionEditModeEnabled = false;
                 this.message = null;
             },
 
