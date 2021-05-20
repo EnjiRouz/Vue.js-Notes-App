@@ -7,8 +7,8 @@
                     <input class="note-editor"
                            v-if="note.titleEditModeEnabled"
                            v-model="note.title"
-                           @blur="[note.titleEditModeEnabled = false, $emit('update')]"
-                           @keyup.enter="[note.titleEditModeEnabled=false, $emit('update')]"
+                           @blur="[note.titleEditModeEnabled = false, note.date = new Date(Date.now()).toLocaleString(), $emit('update')]"
+                           @keyup.enter="[note.titleEditModeEnabled=false, note.date = new Date(Date.now()).toLocaleString(), $emit('update')]"
                            v-focus>
                     <p v-else @click="note.titleEditModeEnabled = true">{{ note.title }}</p>
                     <button class="close-btn" @click="removeNote(note.id)">x</button>
@@ -17,8 +17,8 @@
                     <input class="note-editor"
                            v-if="note.descriptionEditModeEnabled"
                            v-model="note.description"
-                           @blur="[note.descriptionEditModeEnabled = false, $emit('update')]"
-                           @keyup.enter="[note.descriptionEditModeEnabled=false, $emit('update')]"
+                           @blur="[note.descriptionEditModeEnabled = false, note.date = new Date(Date.now()).toLocaleString(), $emit('update')]"
+                           @keyup.enter="[note.descriptionEditModeEnabled=false, note.date = new Date(Date.now()).toLocaleString(), $emit('update')]"
                            v-focus>
                     <p v-else @click="note.descriptionEditModeEnabled = true">{{ note.description }}</p>
                     <span>{{ note.date }}</span>
