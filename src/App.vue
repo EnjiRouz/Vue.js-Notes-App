@@ -20,7 +20,7 @@
                                 placeholder="Find a note"
                                 @search="search = $event"/>
 
-                        <div class="icons">
+                        <div class="icons" v-if="!isMobile()">
                             <svg :class="{ active: grid }" @click="grid = true" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -168,6 +168,12 @@
 
             getUniqueId() {
                 return this.uniqueId += 1;
+            },
+
+            isMobile() {
+                let isMobileDevice = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+                if (isMobileDevice) this.grid = false;
+                return isMobileDevice;
             }
         }
     }

@@ -63,12 +63,11 @@
     }
 
     input {
-        padding: 16px 16px 16px 56px !important;
+        padding: 16px 16px 16px 56px;
         margin-bottom: 0;
         border-radius: 30px;
         color: #909399;
         font-size: 16px;
-        min-width: 400px;
         height: auto;
     }
 </style>
